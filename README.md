@@ -19,6 +19,19 @@ Run the following command in your Terminal window to create a Homepage controlle
 
     rails g controller Homepage index
 
+Inside this file, replace get 'homepage/index' with root 'homepage#index' so that the file looks like the following:
+
+    root 'homepage#index'
+
+This modification instructs Rails to map requests to the root of the application to the index action of the Homepage controller, which in turn renders whatever is in the index.html.erb file located at app/views/homepage/index.html.erb on to the browser.
+
+To verify that this is working:
+
+``rails s --binding=127.0.0.1``
+
+
+Next, delete the contents of the ``~/rails_react_recipe/app/views/homepage/index.html.erb`` file. By doing this, you will ensure that the contents of index.html.erb do not interfere with the React rendering of your frontend.
+
 
 
 **Source:**
