@@ -15,7 +15,9 @@ Run the following command in your Terminal window to install these packages with
 
     yarn add react-router-dom bootstrap jquery popper.js
 
+Run the following command in your Terminal window to create a Homepage controller with an index action:
 
+    rails g controller Homepage index
 
 
 
