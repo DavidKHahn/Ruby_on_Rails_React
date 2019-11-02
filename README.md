@@ -11,6 +11,12 @@ Now that the application is connected to a database, start the application by ru
 
     rails s --binding=127.0.0.1
 
+Run the following command in your Terminal window to install these packages with the Yarn package manager:
+
+    yarn add react-router-dom bootstrap jquery popper.js
+
+
+
 
 
 **Source:**
