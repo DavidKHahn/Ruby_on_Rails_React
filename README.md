@@ -1,24 +1,18 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To start postgreSQL on MacBook:
 
-Things you may want to cover:
+>``brew services start postgresql``
 
-* Ruby version
+To create database (config/database.yml for db name, pw):
 
-* System dependencies
+>``rails db:create``
 
-* Configuration
+Now that the application is connected to a database, start the application by running the following command in you Terminal window:
 
-* Database creation
+    rails s --binding=127.0.0.1
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+**Source:**
 
-* Deployment instructions
-
-* ...
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-a-ruby-on-rails-project-with-a-react-frontend
