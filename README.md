@@ -32,6 +32,18 @@ To verify that this is working:
 
 Next, delete the contents of the ``~/rails_react_recipe/app/views/homepage/index.html.erb`` file. By doing this, you will ensure that the contents of index.html.erb do not interfere with the React rendering of your frontend.
 
+First, rename the ``~/rails_react_recipe/app/javascript/packs/hello_react.jsx`` file to ``~/rails_react_recipe/app/javascript/packs/Index.jsx``.
+
+
+Add the following highlighted lines of code at the end of the head tag in the application layout file:
+
+
+`` <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%= javascript_pack_tag 'Index' %>``
+
+Adding the JavaScript pack to your application’s header makes all your JavaScript code available and executes the code in your Index.jsx file on the page whenever you run the app. Along with the JavaScript pack, you also added a meta viewport tag to control the dimensions and scaling of pages on your application.
+
+
 
 
 **Source:**
