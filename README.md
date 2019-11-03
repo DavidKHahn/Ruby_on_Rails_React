@@ -77,6 +77,39 @@ With these changes, save and exit the file. You’re now ready to run your migra
 
     rails db:migrate
 
+With your recipe model in place, create your recipes controller and add the logic for creating, reading, and deleting recipes. In your Terminal window, run the following command:
+
+    rails generate controller api/v1/Recipes index create show destroy -j=false -y=false --skip-template-engine --no-helper
+
+In this command, you created a Recipes controller in an api/v1 directory with an index, create, show, and destroy action. The index action will handle fetching all your recipes, the create action will be responsible for creating new recipes, the show action will fetch a single recipe, and the destroy action will hold the logic for deleting a recipe.
+
+You also passed some flags to make the controller more lightweight, including:
+
+- -j=false which instructs Rails to skip generating associated JavaScript files.
+- -y=false which instructs Rails to skip generating associated stylesheet files.
+- --skip-template-engine, which instructs Rails to skip generating Rails view files, since React is handling your front-end needs.
+- --no-helper, which instructs Rails to skip generating a helper file for your controller.
+
+Running the command also updated your routes file with a route for each action in the Recipes controller. To use these routes, make changes to your config/routes.rb file.
+
+        post 'recipes/create'
+        get '/show/:id', to: 'recipes#show'
+        delete '/destroy/:id', to: 'recipes#destroy'
+        ...
+    end
+    root 'homepage#index'
+    get '/*path' => 'homepage#index'
+
+In this route file, you modified the HTTP verb of the create and destroy routes so that it can post and delete data. You also modified the routes for the show and destroy action by adding an :id parameter into the route. :id will hold the identification number of the recipe you want to read or delete.
+
+You also added a catch all route with get '/*path' that will direct any other request that doesn’t match the existing routes to the index action of the homepage controller. This way, the routing on the frontend will handle requests that are not related to creating, reading, or deleting recipes.
+
+To see a list of routes available in your application, run the following command in your Terminal window:
+
+    rails routes
+
+
+
 
 
 
