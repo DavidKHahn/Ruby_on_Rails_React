@@ -169,6 +169,23 @@ In the new lines of code, you created a private recipe method. The recipe method
 In the destroy action, you did something similar using Ruby’s safe navigation operator &., which avoids nil errors when calling a method. This let’s you delete a recipe only if it exists, then send a message as a response.
 
 
+    9.times do |i|
+    Recipe.create(
+    name: "Recipe #{i + 1}",
+    ingredients: '227g tub clotted cream, 25g butter, 1 tsp cornflour,100g parmesan, grated nutmeg, 250g fresh fettuccine or tagliatelle, snipped chives or chopped parsley to serve (optional)',
+    instruction: 'In a medium saucepan, stir the clotted cream, butter, and cornflour over a low-ish heat and bring to a low simmer. Turn off the heat and keep warm.'
+    )
+    end
+
+In this code, you are using a loop to instruct Rails to create nine recipes with a name, ingredients, and instruction.
+To seed the database with this data, run the following command in your Terminal window:
+
+``rails db:seed``
+
+Running this command adds nine recipes to your database. Now you can fetch them and render them on the frontend.
+
+The component to view all recipes will make a HTTP request to the index action in the RecipesController to get a list of all recipes. These recipes will then be displayed in cards on the page.
+
 
 
 
