@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Recipes extends React.Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class Recipes extends React.Component {
       .then(response => this.setState({ recipes: response }))
       .catch(() => this.props.history.push("/"));
 }
-
 render() {
     const { recipes } = this.state;
     const allRecipes = recipes.map((recipe, index) => (

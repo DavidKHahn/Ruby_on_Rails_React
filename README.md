@@ -190,7 +190,13 @@ REACT COMPONENTS:
 
 In your componentDidMount method, you made an HTTP call to fetch all recipes using the Fetch API. If the response is successful, the application saves the array of recipes to the recipe state. If there’s an error, it will redirect the user to the homepage.
 
-Finally, add a render method in the Recipe class. The render method holds the React elements that will be evaluated and displayed on the browser page when a component is rendered. In this case, the render method will render cards of recipes from the component state. Add the following highlighted lines to Recipes.jsx:
+Finally, add a render method in the Recipe class. The render method holds the React elements that will be evaluated and displayed on the browser page when a component is rendered. In this case, the render method will render cards of recipes from the component state. Add the following highlighted lines to Recipes.jsx: (GITHUB [master 22107e3] react feature).
+
+RUN THE SERVER AGAIN TO CHECK ON CLIENT SIDE CODE:
+
+``rails s --binding=127.0.0.1``
+
+
 
 
 
