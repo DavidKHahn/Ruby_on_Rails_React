@@ -108,6 +108,66 @@ To see a list of routes available in your application, run the following command
 
     rails routes
 
+Add the following highlighted lines of code to the recipes controller:
+
+    def index
+    recipe = Recipe.all.order(created_at: :desc)
+    render json: recipe
+
+In your index action, using the all method provided by ActiveRecord, you get all the recipes in your database. Using the order method, you order them in descending order by their created date. This way, you have the newest recipes first. Lastly, you send your list of recipes as a JSON response with render.
+
+Next, add the logic for creating new recipes. As with fetching all recipes, you’ll rely on ActiveRecord to validate and save the provided recipe details. Update your recipe controller with the following highlighted lines of code:
+
+    def create
+        recipe = Recipe.create!(recipe_params)
+        if recipe
+        render json: recipe
+        else
+        render json: recipe.errors
+        end
+
+    ...
+    def destroy
+    end
+
+    private
+
+    def recipe_params
+        params.permit(:name, :image, :ingredients, :instruction)
+    end
+    end
+
+In the create action, you use ActiveRecord’s create method to create a new recipe. The create method has the ability to assign all controller parameters provided into the model at once. This makes it easy to create records, but also opens the possibility of malicious use. This can be prevented by using a feature provided by Rails known as strong parameters. This way, parameters can’t be assigned unless they’ve been whitelisted. In your code, you passed a recipe_params parameter to the create method. The recipe_params is a private method where you whitelisted your controller parameters to prevent wrong or malicious content from getting into your database. In this case, you are permitting a name, image, ingredients, and instruction parameter for valid use of the create method.
+
+Your recipe controller can now read and create recipes. All that’s left is the logic for reading and deleting a single recipe. Update your recipes controller with the following code:
+
+    ...
+    def show
+    if recipe
+      render json: recipe
+    else
+      render json: recipe.errors
+    end
+    end
+
+    ...
+    def destroy
+    recipe&.destroy
+    render json: { message: 'Recipe deleted!' }
+    end
+
+    ...
+      end
+
+    def recipe
+        @recipe ||= Recipe.find(params[:id])
+    end
+    end
+
+In the new lines of code, you created a private recipe method. The recipe method uses ActiveRecord’s find method to find a recipe whose idmatches the id provided in the params and assigns it to an instance variable @recipe. In the show action, you checked if a recipe is returned by the recipe method and sent it as a JSON response, or sent an error if it was not.
+
+In the destroy action, you did something similar using Ruby’s safe navigation operator &., which avoids nil errors when calling a method. This let’s you delete a recipe only if it exists, then send a message as a response.
+
 
 
 
