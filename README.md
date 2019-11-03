@@ -54,6 +54,30 @@ Running the generate model command creates two files:
 A `recipe.rb` file that holds all the model related logic.
 A `20190407161357_create_recipes.rb` file (the number at the beginning of the file may differ depending on the date when you run the command). This is a migration file that contains the instruction for creating the database structure.
 
+Add the following highlighted lines of code to the file:
+
+    validates :name, presence: true
+    validates :ingredients, presence: true
+    validates :instruction, presence: true
+
+In this code, you added model validation which checks for the presence of a name, ingredients, and instruction field. Without the presence of these three fields, a recipe is invalid and won’t be saved to the database.
+
+For Rails to create the recipes table in your database, you have to run a migration, which in Rails is a way to make changes to your database programmatically. To make sure that the migration works with the database you set up, it is necessary to make changes to the `20190407161357_create_recipes.rb` file.
+
+Add the following highlighted lines, so that the file looks like this:
+
+    t.string :name, null: false
+    t.text :ingredients, null: false
+    t.text :instruction, null: false
+    t.string :image, default: 'https://raw.githubusercontent.com/do-community/react_rails_recipe/master/app/assets/images/Sammy_Meal.jpg'
+
+This migration file contains a Ruby class with a change method, and a command to create a table called recipes along with the columns and their data types. You also updated 20190407161357_create_recipes.rb with a NOT NULL constraint on the name, ingredients, and instruction columns by adding null: false, ensuring that these columns have a value before changing the database. Finally, you added a default image URL for your image column; this could be another URL if you wanted to use a different image.
+
+With these changes, save and exit the file. You’re now ready to run your migration and actually create your table. In your Terminal window, run the following command:
+
+    rails db:migrate
+
+
 
 
 **Source:**
