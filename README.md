@@ -305,7 +305,17 @@ class Recipe extends React.Component {
 
     }
 
-export default Recipe;
+    export default Recipe;
+
+In the NewRecipe component’s constructor, you initialized your state object with empty name, ingredients, and instruction fields. These are the fields you need to create a valid recipe. You also have three methods; onChange, onSubmit, and stripHtmlEntities, which you bound to this. These methods will handle updating the state, form submissions, and converting special characters (like <) into their escaped/encoded values (like &lt;), respectively.
+
+In the stripHtmlEntities method, you’re replacing the < and > characters with their escaped value. This way you’re not storing raw HTML in your database.
+
+In the onChange method, you used the ES6 computed property names to set the value of every user input to its corresponding key in your state. In the onSubmit method, you checked that none of the required inputs are empty. You then build an object that contains the parameters required by the recipe controller to create a new recipe. Using regular expression, you replace every new line character in the instruction with a break tag, so you can retain the text format entered by the user.
+
+To protect against Cross-Site Request Forgery (CSRF) attacks, Rails attaches a CSRF security token to the HTML document. This token is required whenever a non-GET request is made. With the token constant in the preceding code, your application verifies the token on the server and throws an exception if the security token doesn’t match what is expected. In the onSubmit method, the application retrieves the CSRF token embedded in your HTML document by Rails and makes a HTTP request with a JSON string. If the recipe is successfully created, the application redirects the user to the recipe page where they can view their newly created recipe.
+
+In the render method, you have a form that contains three input fields; one for the recipeName, recipeIngredients, and instruction. Each input field has an onChange event handler that calls the onChange method. Also, there’s an onSubmit event handler on the submit button that calls the onSubmit method which then submits the form data.
 
 
 
