@@ -317,6 +317,10 @@ To protect against Cross-Site Request Forgery (CSRF) attacks, Rails attaches a C
 
 In the render method, you have a form that contains three input fields; one for the recipeName, recipeIngredients, and instruction. Each input field has an onChange event handler that calls the onChange method. Also, there’s an onSubmit event handler on the submit button that calls the onSubmit method which then submits the form data.
 
+In the deleteRecipe method, you get the id of the recipe to be deleted, then build your url and grab the CSRF token. Next, you make a DELETE request to the Recipes controller to delete the recipe. If the recipe is successfully deleted, the application redirects the user to the recipes page.
+
+To run the code in the deleteRecipe method whenever the delete button is clicked, pass it as the click event handler to the button. Add an onClick event to the delete button in the render method.
+
 
 
 
